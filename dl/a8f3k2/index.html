@@ -10,22 +10,47 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'DM Sans', sans-serif; background: #faf8f5; color: #1a1a1a; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
 .card { max-width: 520px; padding: 60px 40px; text-align: center; }
-.check { width: 64px; height: 64px; background: #c9a227; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
-.check svg { stroke: #fff; }
+.icon { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+.icon-success { background: #c9a227; }
+.icon-error { background: #d44; }
+.icon svg { stroke: #fff; }
 h1 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 900; margin-bottom: 12px; }
 p { font-size: 16px; color: #555; line-height: 1.6; margin-bottom: 28px; }
 .btn { display: inline-block; background: #1a1a1a; color: #faf8f5; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; padding: 16px 40px; border-radius: 8px; text-decoration: none; letter-spacing: 0.5px; transition: background 0.2s; }
 .btn:hover { background: #333; }
 .note { font-size: 13px; color: #999; margin-top: 20px; }
+.hidden { display: none; }
 </style>
 </head>
 <body>
-<div class="card">
-<div class="check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-<h1>You're In</h1>
-<p>Your copy of <strong>How to Run a One-Person Real Estate Team with AI</strong> is ready. Click below to download.</p>
-<a class="btn" href="real-estate-ai-playbook.pdf" download>Download PDF</a>
-<p class="note">Having trouble? Email support and we'll get it sorted.</p>
+
+<!-- Success state (shown only with valid session_id) -->
+<div class="card hidden" id="success">
+  <div class="icon icon-success"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <h1>You're In</h1>
+  <p>Your copy of <strong>How to Run a One-Person Real Estate Team with AI</strong> is ready. Click below to download.</p>
+  <a class="btn" id="dl-btn" href="#">Download PDF</a>
+  <p class="note">Having trouble? Email support and we'll get it sorted.</p>
 </div>
+
+<!-- Error state (shown without session_id) -->
+<div class="card hidden" id="denied">
+  <div class="icon icon-error"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+  <h1>Access Denied</h1>
+  <p>This download link is only available after purchase. If you just bought the playbook and are seeing this, please check your email or try the link from your Stripe receipt.</p>
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var sid = params.get('session_id');
+  if (sid && sid.startsWith('cs_')) {
+    document.getElementById('success').classList.remove('hidden');
+    document.getElementById('dl-btn').href = 'real-estate-ai-playbook.pdf';
+  } else {
+    document.getElementById('denied').classList.remove('hidden');
+  }
+})();
+</script>
 </body>
 </html>
