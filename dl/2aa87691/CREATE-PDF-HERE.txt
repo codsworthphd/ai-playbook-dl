@@ -1,0 +1,15 @@
+📄 PDF PLACEHOLDER
+
+To complete setup:
+1. Open projects/ai-guides/roofing-ai-playbook/roofing-playbook-formatted.html in Chrome
+2. Press Cmd+P (Print)
+3. Choose "Save as PDF"
+4. Save as: roofing-ai-playbook.pdf
+5. Place PDF in this folder (dl/2aa87691/)
+6. Commit and push to GitHub
+7. Download link will be: codsworthphd.github.io/roofing-playbook-dl/dl/2aa87691/
+
+Stripe payment link (LIVE):
+https://buy.stripe.com/9B6eVdafefeT6q1bIQfUQ05
+
+Price: $14.99
